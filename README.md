@@ -2,10 +2,6 @@
 
 Aplicação web para organizar tarefas do dia a dia, feita com **HTML, CSS e JavaScript puro**, sem frameworks nem bibliotecas.
 
-🔗 **Demo:** _adicione aqui o link do GitHub Pages_
-
-![Captura de tela do projeto](./screenshot.png)
-
 ## Funcionalidades
 
 - Adicionar, editar, concluir e excluir tarefas
@@ -52,10 +48,3 @@ gestor-de-tarefas/
 - **Delegação de eventos**: um único listener para todos os itens da lista
 - **Persistência de dados** com tratamento de erros no `localStorage`
 - **Boas práticas de acessibilidade e responsividade**
-
-## Próximos passos (ideias)
-
-- [ ] Arrastar e soltar para reordenar
-- [ ] Categorias ou etiquetas
-- [ ] Exportar e importar tarefas em JSON
-- [ ] Testes automatizados com Vitest
