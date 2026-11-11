@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestor de Tarefas</title>
+  <meta name="description" content="Gestor de tarefas simples feito com HTML, CSS e JavaScript puro. Prioridades, prazos, filtros e dados salvos no navegador.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    (function () {
+      try {
+        var salvo = localStorage.getItem("tema");
+        var escuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.tema = salvo || (escuro ? "escuro" : "claro");
+      } catch (e) {
+        document.documentElement.dataset.tema = "claro";
+      }
+    })();
+  </script>
+</head>
+<body>
+  <main class="app">
+    <header class="topo">
+      <div>
+        <h1>Minhas tarefas</h1>
+        <p class="resumo" id="resumo" aria-live="polite">Carregando…</p>
+      </div>
+      <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar entre tema claro e escuro">
+        <span id="btn-tema-texto">Modo escuro</span>
+      </button>
+    </header>
+
+    <div class="progresso" role="progressbar" aria-label="Progresso das tarefas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progresso">
+      <div class="progresso__barra" id="barra"></div>
+    </div>
+
+    <form class="form" id="form-tarefa" autocomplete="off">
+      <div class="campo campo--titulo">
+        <label for="titulo">Nova tarefa</label>
+        <input type="text" id="titulo" maxlength="100" placeholder="Ex.: Estudar fetch API" required>
+      </div>
+
+      <div class="campo">
+        <label for="prioridade">Prioridade</label>
+        <select id="prioridade">
+          <option value="baixa">Baixa</option>
+          <option value="media" selected>Média</option>
+          <option value="alta">Alta</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="prazo">Prazo</label>
+        <input type="date" id="prazo">
+      </div>
+
+      <button type="submit" class="btn btn--principal">Adicionar tarefa</button>
+    </form>
+
+    <p class="erro" id="erro" role="alert" hidden></p>
+
+    <section class="controles" aria-label="Filtros">
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por status">
+        <button type="button" class="filtro is-ativo" data-filtro="todas" aria-pressed="true">Todas</button>
+        <button type="button" class="filtro" data-filtro="pendentes" aria-pressed="false">Pendentes</button>
+        <button type="button" class="filtro" data-filtro="concluidas" aria-pressed="false">Concluídas</button>
+      </div>
+
+      <div class="campo campo--busca">
+        <label for="busca" class="sr-only">Buscar tarefa</label>
+        <input type="search" id="busca" placeholder="Buscar tarefa">
+      </div>
+    </section>
+
+    <ul class="lista" id="lista"></ul>
+
+    <p class="vazio" id="vazio" hidden></p>
+
+    <footer class="rodape">
+      <button type="button" class="btn btn--sutil" id="btn-limpar">Remover concluídas</button>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
